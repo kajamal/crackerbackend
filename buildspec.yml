@@ -1,10 +1,10 @@
 version: 0.2
 
-env:
-  variables:
-    # IMAGE_REPO_NAME: "mybackendapp"  # Replace with your ECR repo name
-    # IMAGE_TAG: "latest"              # You can modify the tag if necessary
-    # AWS_DEFAULT_REGION: "us-east-1"  # Replace with your region
+# env:
+#   variables:
+#     # IMAGE_REPO_NAME: "mybackendapp"  # Replace with your ECR repo name
+#     # IMAGE_TAG: "latest"              # You can modify the tag if necessary
+#     # AWS_DEFAULT_REGION: "us-east-1"  # Replace with your region
 
 phases:
   install:
