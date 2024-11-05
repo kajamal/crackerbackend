@@ -15,8 +15,7 @@ phases:
 
       # Now install OpenJDK 17
       - echo Installing OpenJDK 17...
-      - wget https://download.java.net/java/17/archive/jdk-17_linux-x64_bin.rpm
-      - yum localinstall -y jdk-17_linux-x64_bin.rpm
+      - sudo yum install java-17-amazon-corretto-headless
 
       # Install Maven
       - echo Installing Maven...
