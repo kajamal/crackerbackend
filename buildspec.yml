@@ -1,0 +1,57 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO_NAME: "mybackendapp"  # Replace with your ECR repo name
+    IMAGE_TAG: "latest"              # You can modify the tag if necessary
+    AWS_DEFAULT_REGION: "us-east-1"  # Replace with your region
+
+phases:
+  install:
+    commands:
+      # Install OpenJDK 17 and dependencies
+      - echo Installing OpenJDK 17...
+      - yum update -y
+      - yum install -y wget
+      - wget https://download.java.net/java/17/archive/jdk-17_linux-x64_bin.rpm
+      - yum localinstall -y jdk-17_linux-x64_bin.rpm
+
+      # Install Maven
+      - echo Installing Maven...
+      - yum install -y maven
+
+      # Install Docker
+      - echo Installing Docker...
+      - yum install -y docker
+      - service docker start
+      - useradd docker
+      - usermod -aG docker $USER
+
+  pre_build:
+    commands:
+      # Log in to AWS ECR
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_REPO_NAME.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+  build:
+    commands:
+      # Build the Maven project with Java 17
+      - echo Building Maven project with Java 17...
+      - mvn clean install  # This will use Java 17 as defined in the environment
+
+  post_build:
+    commands:
+      # Build the Docker image using the Dockerfile
+      - echo Building Docker image...
+      - docker build -t $IMAGE_REPO_NAME .
+      # Tag the image with the ECR repository URI
+      - echo Tagging Docker image...
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $IMAGE_REPO_NAME.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      # Push the Docker image to Amazon ECR
+      - echo Pushing Docker image to ECR...
+      - docker push $IMAGE_REPO_NAME.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+
+artifacts:
+  files:
+    - target/*.jar  # Assuming the JAR is created in the target directory by Maven
+  discard-paths: yes
