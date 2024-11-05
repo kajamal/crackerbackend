@@ -9,10 +9,12 @@ env:
 phases:
   install:
     commands:
-      # Install OpenJDK 17 and dependencies
+      # Install required system utilities (coreutils) first
+      - echo Installing basic utilities...
+      - yum install -y coreutils wget
+
+      # Now install OpenJDK 17
       - echo Installing OpenJDK 17...
-      - yum update -y
-      - yum install -y wget
       - wget https://download.java.net/java/17/archive/jdk-17_linux-x64_bin.rpm
       - yum localinstall -y jdk-17_linux-x64_bin.rpm
 
