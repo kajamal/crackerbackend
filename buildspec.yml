@@ -20,9 +20,6 @@ phases:
       # Install Docker
       - echo Installing Docker...
       - yum install -y docker
-      - service docker start
-      - useradd docker
-      - usermod -aG docker $USER
 
   pre_build:
     commands:
