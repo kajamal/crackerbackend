@@ -9,10 +9,6 @@ env:
 phases:
   install:
     commands:
-      # Install required system utilities (coreutils) first
-      - echo Installing basic utilities...
-      - yum install -y coreutils wget
-
       # Now install OpenJDK 17
       - echo Installing OpenJDK 17...
       - sudo yum install java-17-amazon-corretto-headless
