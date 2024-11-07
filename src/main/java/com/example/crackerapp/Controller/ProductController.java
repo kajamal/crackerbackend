@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+// @CrossOrigin
+@CrossOrigin(origins = "https://d1qksalbdef7d1.cloudfront.net")
 @RequestMapping("/api")
 
 public class ProductController {
