@@ -68,6 +68,12 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the JAR file to S3...
       - aws s3 cp target/crackerapp-0.0.1-SNAPSHOT.jar s3://my-unique-bucket-nammmerrr/ --region us-east-1
+      - echo Updating Lambda function with the latest JAR...
+      - aws lambda update-function-code \
+          --function-name autolambda \
+          --s3-bucket my-unique-bucket-nammmerrr \
+          --s3-key crackerapp-0.0.1-SNAPSHOT.jar \
+          --region us-east-1
 
 artifacts:
   files:
