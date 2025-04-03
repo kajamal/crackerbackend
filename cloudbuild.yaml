@@ -4,3 +4,5 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/backend:latest'
+options:
+  logging: CLOUD_LOGGING_ONLY  
