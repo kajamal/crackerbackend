@@ -1,8 +1,5 @@
-# Use a base image with Java
-FROM openjdk:17-jdk
-
-# Install Maven
-RUN apt-get update && apt-get install -y maven
+# Use a base image with Java and Maven
+FROM maven:3.8.6-openjdk-17
 
 # Set the working directory
 WORKDIR /app
@@ -14,7 +11,7 @@ COPY src ./src
 # Build the project using Maven
 RUN mvn clean install
 
-# Copy the JAR file into the image (optional if already built in the previous step)
+# Copy the JAR file (optional)
 COPY target/crackerapp-0.0.1-SNAPSHOT.jar crackerapp-0.0.1-SNAPSHOT.jar
 
 # Run the application
