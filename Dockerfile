@@ -22,7 +22,7 @@ COPY src ./src
 RUN mvn clean install
 
 # Copy the JAR file (optional if already built)
-COPY target/crackerapp-0.0.1-SNAPSHOT.jar crackerapp-0.0.1-SNAPSHOT.jar
+COPY app/target/crackerapp-0.0.1-SNAPSHOT.jar crackerapp-0.0.1-SNAPSHOT.jar
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "crackerapp-0.0.1-SNAPSHOT.jar"]
