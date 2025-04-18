@@ -25,4 +25,4 @@ RUN mvn clean install
 # COPY app/target/crackerapp-0.0.1-SNAPSHOT.jar crackerapp-0.0.1-SNAPSHOT.jar
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "crackerapp-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "target/crackerapp-0.0.1-SNAPSHOT.jar"]
